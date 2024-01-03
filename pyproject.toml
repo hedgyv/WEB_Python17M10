@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "web-python17m10"
+version = "0.1.0"
+description = ""
+authors = ["hedgyv <hedgy85@hotmail.com>"]
+license = "hedgy"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+django = "^5.0.1"
+pillow = "^10.2.0"
+psycopg2-binary = "^2.9.9"
+psycopg2 = "^2.9.9"
+pymongo = "^4.6.1"
+paginator = "^0.5.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
