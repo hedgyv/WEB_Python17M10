@@ -3,6 +3,7 @@ from django.views import View
 from django.contrib import messages
 
 from .forms import RegisterForm
+from .users_to_mongo import save_user_to_mongodb
 
 class RegisterView(View):
     template_name = 'app_users/register.html'
@@ -20,8 +21,9 @@ class RegisterView(View):
     def post(self, request):
         form = self.form_class(request.POST)
         if form.is_valid():
-            form.save()
+            print(form.save())
             username = form.cleaned_data["username"]
+            save_user_to_mongodb(form.save())
             messages.success(request, f"Вітаємо {username}. Ваш акаунт успішно створено")
             return redirect(to="app_users:signin")
         return render(request, self.template_name, {"form": form})

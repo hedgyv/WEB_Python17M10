@@ -1,6 +1,7 @@
 import json
 from bson.objectid import ObjectId
 
+
 from pymongo.mongo_client import MongoClient
 
 uri = "mongodb+srv://web17_mod8:IDkrkN1JmruWcbSb@web17.k2uu2ec.mongodb.net/?retryWrites=true&w=majority"
