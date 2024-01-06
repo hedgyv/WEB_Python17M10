@@ -4,6 +4,7 @@ from django.contrib import messages
 
 from .forms import RegisterForm
 from .users_to_mongo import save_user_to_mongodb
+from .mongo_to_postgres import migrate_to_postgres
 
 class RegisterView(View):
     template_name = 'app_users/register.html'
@@ -24,6 +25,7 @@ class RegisterView(View):
             print(form.save())
             username = form.cleaned_data["username"]
             save_user_to_mongodb(form.save())
+            migrate_to_postgres()
             messages.success(request, f"Вітаємо {username}. Ваш акаунт успішно створено")
             return redirect(to="app_users:signin")
         return render(request, self.template_name, {"form": form})
