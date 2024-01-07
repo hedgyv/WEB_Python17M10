@@ -26,7 +26,9 @@
                 <form method="post" action="{% url 'app_users:logout' %}?next=/">
                     {% csrf_token %}
                     <button class="btn btn-primary" type="">Logout</button>
+                    <a href="{% url 'quotes:add_quote' %}" class="btn btn-primary" role="button">Add Author & Quote</a>
                 </form>
+
                 {% else %}
                 <a href="{% url 'app_users:signup' %}" class="btn btn-primary">SignUp</a>
                 <a href="{% url 'app_users:signin' %}" class="btn btn-primary">LogIn</a>

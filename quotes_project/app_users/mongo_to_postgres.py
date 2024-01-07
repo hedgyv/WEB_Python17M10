@@ -34,7 +34,8 @@ def migrate_to_postgres():
     create_users_table()
 
     for data in mongo_data:
-        postgres_cursor.execute("INSERT INTO users_from_mongo (id, username, email, password) VALUES (%s, %s, %s, %s)", 
+        postgres_cursor.execute('''INSERT INTO users_from_mongo (id, username, email, password) VALUES (%s, %s, %s, %s) 
+                                WHERE NOT EXISTS (SELECT 1 FROM users_from_mongo WHERE id = %s)''', 
             (str(data['_id']),
             data['username'],
             data['email'],
