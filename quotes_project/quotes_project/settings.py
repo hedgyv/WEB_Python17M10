@@ -10,17 +10,33 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+from os import getenv
 from pathlib import Path
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+env = environ.Env()
+environ.Env.read_env(BASE_DIR / '.env')
 
+SECRET_KEY = env('SECRET_KEY')
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = env('MAIL_HOST')
+EMAIL_PORT = env('MAIL_PORT')
+EMAIL_STARTTLS = False
+EMAIL_USE_SSL = True
+EMAIL_USE_TLS = False
+EMAIL_HOST_USER = env('MAIL_USERNAME')
+EMAIL_HOST_PASSWORD = env('MAIL_PASSWORD')
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-!chc8=t7x^g47r9autifea(vtfeg^)o5uwc4#xj*vwx9@m&opi'
+#SECRET_KEY = 'django-insecure-!chc8=t7x^g47r9autifea(vtfeg^)o5uwc4#xj*vwx9@m&opi'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -122,6 +138,8 @@ STATIC_URL = 'static/'
 LOGIN_URL = "/users/signin"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
